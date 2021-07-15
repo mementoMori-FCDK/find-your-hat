@@ -1,8 +1,6 @@
 const prompt = require('prompt-sync')({sigint: true});
-const { Field } = require('./field.js');
-const fieldMod = require('./field.js');
 
-const Fields = require('./field.js');
+const FieldMod = require('./field.js');                     // Field module
+const Field = FieldMod.Field; 
 
-let newField = new Fields.Field(Field.generateField());
-newField.print();
+let myField = new Field(Field.generateField(10, 10, 20));

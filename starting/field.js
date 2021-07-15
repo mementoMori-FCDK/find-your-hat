@@ -18,6 +18,13 @@ class Field {
         });
     }
 
+    static genHatPosition(height, width) {
+        let i = Math.floor(Math.random() * height);
+        let j = Math.floor(Math.random() * width);
+        if((i == 0) && (j == 0)) j++;
+        return [i, j];
+    }
+
     static generateField(height, width, percentage) {
         let field = [];
         for (let i = 0; i < height; i++) {
@@ -38,13 +45,17 @@ class Field {
             holesNum--;
             if (i == (width - 1)) i = 0;
         }
+
+        let checkHatPos = false;                                        // boolean to check new hat position
+        let newHatPos;
+        while(!checkHatPos) {                                           // check new hat position
+            newHatPos = this.genHatPosition(height, width);
+            if (field[newHatPos[0]][newHatPos[1]] != hole) checkHatPos = true;
+        }
+        field[newHatPos[0]][newHatPos[1]] = hat;
         return field;
     }
 }
-
-let map = Field.generateField(10, 10, 15);
-const newField = new Field(map);
-newField.print();
 
 module.exports = {
     Field: Field
