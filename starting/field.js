@@ -12,6 +12,11 @@ class Field {
         return this._field;
     }
 
+    redraw(newPosition) {
+        this._field[newPosition[0]][newPosition[1]] = pathCharacter;
+        this.print();  
+    }
+
     print() {
         this._field.forEach(element => {
             console.log(element.join(' '));
