@@ -4,8 +4,26 @@ const fieldCharacter = '░';
 const pathCharacter = '*';
 
 class Field {
-    constructor(field) {
+    constructor(height, width, field) {
         this._field = field;
+        this._width = width;
+        this._height = height;
+    }
+    
+    set width(width) {
+        this._width = width;
+    }
+
+    set height(height) {
+        this._height = height;
+    }
+
+    get width() {
+        return this._width;
+    }
+
+    get height() {
+        return this._height;
     }
 
     get field() {
@@ -21,6 +39,21 @@ class Field {
         this._field.forEach(element => {
             console.log(element.join(' '));
         });
+    }
+
+    checkMove(newPos) {
+        if (newPos[0] >= this._height || newPos[0] < 0)
+            return false;
+        else if (newPos[1] >= this._width || newPos[1] < 0)
+            return false;
+        else if (this._field[newPos[0]][newPos[1]] == hole)
+            return false;
+        else return true;
+    }
+
+    checkWinCond(newPos) {
+        if (this._field[newPos[0]][newPos[1]] == hat) return true;
+        else return false;
     }
 
     static genHatPosition(height, width) {
